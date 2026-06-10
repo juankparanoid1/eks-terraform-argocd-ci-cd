@@ -3,4 +3,4 @@ replicaCount: 1
 image:
   repository: juankparanoid1/go-webapp
   pullPolicy: IfNotPresent
-  tag: v3
+  tag: 32a7311751e05eabca702c181d145b8d166e7b06
