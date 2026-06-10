@@ -71,12 +71,58 @@ terraform apply
 ```
 
 ### Step 2: Access Kubernetes Cluster
-
+```
 aws eks update-kubeconfig --region us-east-1 --name [CLUSTER_NAME]
+```
 
-### Step 3: GitOps Verification (ArgoCD)
+### Step 3: Install webapp using helm
+```
+cd helm
+helm install go-webapp ./go-webapp-chart
+```
 
-kubectl get pods -n argocd  
-kubectl get applications -n argocd  
+```
+#Check loadbalancer url and test it
+kubectl get ingress
+```
 
+```
+#Uninstall
+helm uninstall go-webapp
+```
+
+You can access it by navigating to the path ```/courses```
+
+### Step 3: Install argocd
+
+```
+kubectl create namespace argocd
+kubectl apply -n argocd --server-side --force-conflicts -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+```
+#check status
+kubectl get pods -n argocd
+```
+
+```
+#Access the Argo CD UI (Loadbalancer service)
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+```
+
+```
+#Get the Loadbalancer service IP and test it
+kubectl get svc argocd-server -n argocd
+```
+
+```
+#Get initial password to login
+kubectl get secrets -n argocd
+kubectl edit secret argocd-initial-admin-secret -n argocd
+```
+
+```
+#Due to the password is encode, remember to not copy the last % symbol
+echo [PASSWORD] | base64 --decode
+```
 ---

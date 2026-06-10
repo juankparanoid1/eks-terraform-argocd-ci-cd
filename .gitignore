@@ -22,13 +22,18 @@ go.work
 go.work.sum
 
 
-.terraform/
+**/.terraform/
 *.tfstate
 *.tfstate.*
 
 *.tfvars
 *.tfvars.json
+terraform.tfvars
 .terraform.tfvars.lock.hcl
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
 
 *.backup
 *.log
