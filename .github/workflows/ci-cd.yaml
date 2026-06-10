@@ -70,11 +70,11 @@ jobs:
           token: ${{ secrets.GIT_TOKEN }}
       - name: Update Helm Chart with New Tag
         run: |
-          sed -i "s/tag: .*/tag: ${{ github.sha }}/" helm/go-web-app-chart/values.yaml
+          sed -i "s/tag: .*/tag: ${{ github.sha }}/" helm/go-webapp-chart/values.yaml
       - name: Commit and Push Changes
         run: |
           git config --global user.name "juankparanoid1"
           git config --global user.email "${{ secrets.GIT_EMAIL }}"
-          git add helm/go-web-app-chart/values.yaml
+          git add helm/go-webapp-chart/values.yaml
           git commit -m "Update Helm chart with new image tag: ${{ github.sha }}"
           git push origin main
