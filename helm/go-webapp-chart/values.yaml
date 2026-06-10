@@ -1,0 +1,6 @@
+replicaCount: 1
+
+image:
+  repository: juankparanoid1/go-webapp
+  pullPolicy: IfNotPresent
+  tag: v3
